@@ -1,11 +1,11 @@
-# @team-griffin/webpack-dudupe-plugin
+# @team-griffin/webpack-dedupe-plugin
 
-[![npm version](https://badge.fury.io/js/%40team-griffin%2Fwebpack-dudupe-plugin.svg)](https://badge.fury.io/js/%40team-griffin%2Fwebpack-dudupe-plugin)
+[![npm version](https://badge.fury.io/js/%40team-griffin%2Fwebpack-dedupe-plugin.svg)](https://badge.fury.io/js/%40team-griffin%2Fwebpack-dedupe-plugin)
 
 ```sh
-yarn add --dev @team-griffin/webpack-dudupe-plugin
-npm i --save-dev @team-griffin/webpack-dudupe-plugin
-pnpm i --save-dev @team-griffin/webpack-dudupe-plugin
+yarn add --dev @team-griffin/webpack-dedupe-plugin
+npm i --save-dev @team-griffin/webpack-dedupe-plugin
+pnpm i --save-dev @team-griffin/webpack-dedupe-plugin
 ```
 
 *Note:* This project currently has webpack v4 as a peer dependency
@@ -31,7 +31,7 @@ Due to how node's require algorithm works package managers are until to dedupe t
 This plugin isn' a traditional webpack plugin due to really being a wrapper around an existing webpack plugin (NormalModuleReplacementPlugin).
 
 ```js
-const createDedupe = require('@team-griffin/webpack-dudupe-plugin');
+const createDedupe = require('@team-griffin/webpack-dedupe-plugin');
 
 ...
 
