@@ -1,10 +1,13 @@
 {
   "name": "@team-griffin/webpack-dudupe-plugin",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "main": "index.js",
   "repository": "git@github.com:team-griffin/webpack-dudupe-plugin.git",
   "author": "Joshua Thornton <jthornton1@godaddy.com>",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "peerDependencies": {
     "webpack": "4.x.x"
   },
