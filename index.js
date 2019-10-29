@@ -1,5 +1,5 @@
 const { NormalModuleReplacementPlugin } = require('webpack');
-const { resolve } = require('path');
+const { sep } = require('path');
 const escapeStringRegexp = require('escape-string-regexp');
 
 function createMapKey(name, version, file) {
@@ -7,10 +7,10 @@ function createMapKey(name, version, file) {
 }
 
 function createMapKeyFromResource(resource) {
-  const escapedString = escapeStringRegexp(`${resource.resourceResolveData.descriptionFileData.name}/`);
+  const escapedString = escapeStringRegexp(`${resource.resourceResolveData.descriptionFileData.name}${sep}`);
 
   try {
-    const file = new RegExp(`${escapedString}.*`).exec(resource.request)[0];
+    const file = new RegExp(`${escapedString}.*`).exec(resource.resource)[0];
 
     return createMapKey(
       resource.resourceResolveData.descriptionFileData.name,
@@ -30,7 +30,7 @@ function isResourceRegistered(map, resource) {
 
 function createDedupe() {
   const map = {};
-  
+
   return new NormalModuleReplacementPlugin(/.*/, function(resource) {
     if (resource.resourceResolveData == null) {
       return;
@@ -38,13 +38,17 @@ function createDedupe() {
 
     try {
       if (isResourceRegistered(map, resource)) {
-        resource.request = map[createMapKeyFromResource(resource)];
-  
+        const registeredResource = map[createMapKeyFromResource(resource)];
+        if (registeredResource === resource.resource) {
+          return;
+        }
+
+        resource.request = resource.request.replace(resource.resource, registeredResource);
         return;
       }
 
-      map[createMapKeyFromResource(resource)] = resource.request;
-      
+      map[createMapKeyFromResource(resource)] = resource.resource;
+
     } catch(err) {
       return;
     }
