@@ -1,5 +1,5 @@
 const { NormalModuleReplacementPlugin } = require('webpack');
-const { resolve } = require('path');
+const { sep } = require('path');
 const escapeStringRegexp = require('escape-string-regexp');
 
 function createMapKey(name, version, file) {
@@ -7,7 +7,7 @@ function createMapKey(name, version, file) {
 }
 
 function createMapKeyFromResource(resource) {
-  const escapedString = escapeStringRegexp(`${resource.resourceResolveData.descriptionFileData.name}/`);
+  const escapedString = escapeStringRegexp(`${resource.resourceResolveData.descriptionFileData.name}${sep}`);
 
   try {
     const file = new RegExp(`${escapedString}.*`).exec(resource.request)[0];
